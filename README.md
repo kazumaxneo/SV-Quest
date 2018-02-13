@@ -31,7 +31,8 @@ Usage:
 
 Install [HomeBrew](http://brew.sh/) (Mac OS X) or [LinuxBrew](http://brew.sh/linuxbrew/) (Linux).  
 ```
-brew tap homebrew/science
+brew tap brewsci/science
+brew tap brewsci/bio
 brew install bwa
 brew install samtools
 brew install circos
