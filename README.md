@@ -67,8 +67,9 @@ SV-Quest.pl --help
 ## Test run
 ```
 chmod u+x SV-Quest.pl
-tar zxvf sample.tar.gz
-cd test_data/
+mkdir test
+tar zxvf sample.tar.gz -C test/
+cd test/
 ../SV-Quest.pl -f chromosome.fasta -1 forward.fq -2 reverse.fq
 ```  
     
