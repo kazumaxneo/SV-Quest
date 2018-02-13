@@ -1,10 +1,6 @@
 ######################################################################################## 
 SV-Quest 1.0
 
-University of Nagoya  
-
-9 February 2018    
- 
 A Perl scripts to call indel position from mapped.bam.   
 
 SV Quest: Sensitive Structure Variation detection tool
