@@ -71,7 +71,7 @@ cd test/
     
 
 
-## LICENSE ##
+## Licence ##
 
 GPL v3.
 
