@@ -43,6 +43,7 @@ brew install circos
 ```
 cd $HOME 
 git clone git@github.com:kazumaxneo/SV-Quest.git
+cd SV-Quest/
 echo': echo export PATH=\$PATH:`pwd`\ >> ~/.bash_profile && source ~/.bash_profile
 SV-Quest.pl
 ```
