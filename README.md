@@ -23,7 +23,7 @@ Usage:
 ########################################################################################
 
 Structural variations (SVs) are large genomic rearrangements that vary significantly in size, making them challenging to detect with the relatively short reads from next-generation sequencing (NGS). A number of heuristic method have been developed to overcome these restrictions. They works well if SV subtype or SV size were fitted with their methodology. But they are not comprehensive nor tolerant for discovering all classs of SV, and demand high sequence throughput for accurate SV detection. For detecting SV in comprehensive, we developed a new method named SV Quest. Unique feature of SV Quest is the use of mismatch accumulation for detecting SV. The performance of SV Quest was compared with five well known SV detection tools. The results show that among these tools SV Quest is highly sensitive at the relatively low false discovery rates in many cases.  
-  The software is implement in Perl. It is freely available  at https://github.com/kazumaxneo/SV-Quest under the GPLv3 license.
+The software is implement in Perl. It is freely available  at https://github.com/kazumaxneo/SV-Quest under the GPLv3 license.
 
     
 ## Requirements  
