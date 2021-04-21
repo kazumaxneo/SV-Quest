@@ -26,18 +26,17 @@ Structural variations (SVs) are large genomic rearrangements that vary significa
 The software is implement in Perl. It is freely available  at https://github.com/kazumaxneo/SV-Quest under the GPLv3 license.
 
     
-## Requirements  
-- SAMTools  (version >= 1.3.1)   
+## Dependency  
+- SAMTools  (version >= 1.3.1)  
 - BWA (version >= 0.7.17)  
 - circos (v0.67. only required if drawing indel map))  
 
 
-Install [HomeBrew](http://brew.sh/) (Mac OS X) or [LinuxBrew](http://brew.sh/linuxbrew/) (Linux).  
+Install Anaconda or Miniconda.  
 ```
-brew tap brewsci/science
-brew install bwa
-brew install samtools
-brew install circos
+conda install -c bioconda circos
+conda install -c bioconda bwa
+conda install -c bioconda samtools
 ```
     
 
