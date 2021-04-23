@@ -44,7 +44,7 @@ conda install -c bioconda samtools
 ## Source
 ```
 cd $HOME 
-git clone git@github.com:kazumaxneo/SV-Quest.git
+git clone https://github.com/kazumaxneo/SV-Quest.git
 cd SV-Quest/
 echo export PATH=\$PATH:`pwd`\ >> ~/.bash_profile && source ~/.bash_profile
 SV-Quest.pl
