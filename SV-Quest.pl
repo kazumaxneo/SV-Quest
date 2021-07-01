@@ -20,13 +20,13 @@ my $max = "100000";
 my $check = "1";
 my $wide = "12";
 my $Lborder = "300";
-my $cpu = "35";
+my $cpu = "8";
 my $seed = "25";
 my $seedpenalty  = "1";
 my $loose = "275";
 my $lowcoverage = "0.1";
 my $duplicateRemove = "1";
-my $map = "yes";
+my $map = "no";
 my $compress = "2";
 my $radius = "0.65";
 my $slope_threshould = "3";
@@ -61,21 +61,23 @@ my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tProcessing fasta\n" if(
 system("rm $output") if($check == 1);
 system("rm $output $outputdir/log.txt 6F.txt 6R.txt F_mismatch_mountain.txt R_mismatch_mountain.txt temp/F_mismatch_mountain_all.txt temp/R_mismatch_mountain_all.txt $output") unless($check == 1);
 &split if($check == 1);#split the reads by the orientation of the reads
-my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts samtools view of F.sam\n" if($check == 1);
-system("samtools view -@ $cpu -bS temp/F.sam | samtools sort -@ $cpu - > temp/F_sorted.bam") if($check == 1);
-my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts samtools view of R.sam\n" if($check == 1);
-system("samtools view -@ $cpu -bS temp/R.sam | samtools sort -@ $cpu - > temp/R_sorted.bam") if($check == 1);
+my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts samtools sort of F.sam\n" if($check == 1);
+system("samtools sort -@ $cpu -O BAM temp/F.sam > temp/F_sorted.bam") if($check == 1);
+my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts samtools sort of R.sam\n" if($check == 1);
+system("samtools sort -@ $cpu -O BAM temp/R.sam > temp/R_sorted.bam") if($check == 1);
 my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts samtools index of F.bam\n" if($check == 1);
 system("samtools index temp/F_sorted.bam") if($check == 1);
 my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts samtools index of R.bam\n" if($check == 1);
 system("samtools index temp/R_sorted.bam") if($check == 1);
 system("rm temp/F.sam temp/R.sam temp/input.sam") if($check == 1);
 my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\t" if($check == 1);
-system("samtools mpileup -f temp/reference.fa temp/F_sorted.bam -O -Q 0.1 > temp/F_mpileup") if($check == 1 or $check == 3);
+system("sambamba mpileup temp/F_sorted.bam -t $cpu --samtools -f temp/reference.fa -O -Q 0.1 > temp/F_mpileup") if($check == 1 or $check == 3);
 my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\t" if($check == 1 or $check == 3);
-system("samtools mpileup -f temp/reference.fa temp/R_sorted.bam -O -Q 0.1 > temp/R_mpileup") if($check == 1 or $check == 3);
+system("sambamba mpileup temp/R_sorted.bam -t $cpu --samtools -f temp/reference.fa -O -Q 0.1 > temp/R_mpileup") if($check == 1 or $check == 3);
 my @now = localtime;print "INFO $now[2]:$now[1]:$now[0]\tStarts calculation of F&R mismatch\n";
 &extract;#calclulate mismatch base from mpileup
+system("mv temp/*mismatch_mountain_all.txt InDel.txt $outputdir") if($map eq "no");
+
 &circos if($map eq "yes");
 my @now = localtime;print "\nINFO $now[2]:$now[1]:$now[0]\tProgram end.\n";
 system("rm temp/temp* *sai .non-redundant.txt");
@@ -122,6 +124,7 @@ sub title {
 	#	ver0.6 check coverage (dont call low coverage region)
 	#	ver0.7 mismatch mountain height supported.
 	#	ver0.8 redundant call removed.
+	#	ver0.9 sambamba mplileup was introduced.
 	####################################################################################################################################
 
 
@@ -158,7 +161,7 @@ sub title {
 	print "\t -d	remove duplicate call (default 1)\n";
 	print "\t			1;runs\n";
 	print "\t			2;skip\n";
-	print "\t -k	draw indel map using circos (default yes)\n";
+	print "\t -k	draw indel map using circos (default no)\n";
 	print "\t			yes;runs\n";
 	print "\t			no;skip\n";
 	print "\t -R	diameter of map (default 0.65)\n";
@@ -169,7 +172,7 @@ sub title {
 	print "############################################################################################################################################################\n\n";
 	my @now = localtime;print "\nINFO $now[2]:$now[1]:$now[0]\t";
 	print "Starts SV-Quest\n";
-	system("sleep 2s");
+	system("sleep 0.5s");
 }
 
 #-----------------------------------------------------------------------------------------------------------------------------------
