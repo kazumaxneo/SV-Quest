@@ -57,7 +57,7 @@ SV-Quest.pl
     
 
 
-## Calling SVs
+## Calling SVs and other event （e.g. mis-assembly junction, small indels）
 1、call from fastq
 ```
 ./SV-Quest.pl -f refererence.fa -1 forward.fastq -2 reverse.fastq
