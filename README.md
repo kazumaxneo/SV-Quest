@@ -27,6 +27,7 @@ The software is implement in Perl. It is freely available  at https://github.com
 
 <p align="center"><img src="Figure.png" alt="workflow" width="800"></p>
 
+<p align="center"><img src="Table.png" alt="workflow" width="800"></p>
     
 ## Requirements  
 - SAMTools  (version >= 1.3.1)   
